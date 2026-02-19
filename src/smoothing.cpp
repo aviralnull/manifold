@@ -390,7 +390,7 @@ Vec<int> Manifold::Impl::VertHalfedge() const {
   Vec<int> vertHalfedge(NumVert());
   std::unique_ptr<std::atomic<uint8_t>[]> counters(
       new std::atomic<uint8_t>[NumVert()]);
-  for (int i = 0; i < NumVert(); ++i)
+  for (size_t i = 0; i < NumVert(); ++i)
     counters[i].store(0, std::memory_order_relaxed);
   for_each_n(autoPolicy(halfedge_.size(), 1e5), countAt(0), halfedge_.size(),
              [&vertHalfedge, &counters, this](const int idx) {
